@@ -18,7 +18,28 @@ steps:
     containerRegistry: DockerHub
 
 - task: Docker@2
-  displayName: Build Docker Image
+  displayName: Build Runtime Docker Image
+  inputs:
+    command: build
+    containerRegistry: DockerHub
+    arguments: --build-arg ARG_DOTNET_RUNTIME_VERSION=$(RuntimeVersion)
+    repository: jasperd/servercore
+    tags: |
+      $(RuntimeHashTag)
+      $(RuntimeTag)
+
+- task: Docker@2
+  displayName: Push Runtime Image to Docker Hub
+  inputs:
+    command: Push
+    containerRegistry: DockerHub
+    repository: jasperd/servercore
+    tags: |
+      $(RuntimeHashTag)
+      $(RuntimeTag)
+
+- task: Docker@2
+  displayName: Build SDK Docker Image
   inputs:
     command: build
     containerRegistry: DockerHub
@@ -29,7 +50,7 @@ steps:
       $(SdkTag)
 
 - task: Docker@2
-  displayName: Push Image to Docker Hub
+  displayName: Push SDK Image to Docker Hub
   inputs:
     command: Push
     containerRegistry: DockerHub

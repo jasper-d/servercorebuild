@@ -7,9 +7,9 @@ RUN powershell iwr 'https://dot.net/v1/dotnet-install.ps1' -OutFile './dotnet-in
     setx /M DOTNET_CLI_TELEMETRY_OPTOUT "true" && \
     setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE "true" && \
     setx /M DOTNET_RUNNING_IN_CONTAINER "true" && \
-	setx /M ASPNETCORE_URLS "http://+:80" && \
-	setx /M DOTNET_USE_POLLING_FILE_WATCHER "true" && \
-	setx /M NUGET_XMLDOC_MODE "skip" && \
-	setx /M DOTNET_SDK_VERSION %ARG_DOTNET_SDK_VERSION% && \
-	setx /M DOTNET_TOOLS_PATH "C:\dotnet-tools" && \
-	/dotnet-sdk/dotnet.exe --info
+    setx /M ASPNETCORE_URLS "http://+:80" && \
+    setx /M DOTNET_USE_POLLING_FILE_WATCHER "true" && \
+    setx /M NUGET_XMLDOC_MODE "skip" && \
+    setx /M DOTNET_SDK_VERSION %ARG_DOTNET_SDK_VERSION% && \
+    setx /M DOTNET_TOOLS_PATH "C:\dotnet-tools" && \
+    /dotnet-sdk/dotnet.exe --info
