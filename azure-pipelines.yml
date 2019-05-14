@@ -5,11 +5,11 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
-- pwsh: .\set-var.ps1
-  displayName: 'Set build variables'
-
 - pwsh: gci "ENV:" | Out-Host
   displayName: 'Show environment'
+
+- pwsh: .\set-vars.ps1 -GitHash $(Build.SourceVersion)
+  displayName: 'Set build variables'
 
 - task: Docker@2
   displayName: Login to Docker Hub
@@ -18,13 +18,23 @@ steps:
     containerRegistry: DockerHub
 
 - task: Docker@2
-  displayName: Build and Push
+  displayName: Build Docker Image
   inputs:
-    command: buildAndPush
+    command: build
     containerRegistry: DockerHub
-    arguments: --build-args ARG_DOTNET_SDK_VERSION=$(SdkVersion) --no-cache=$(noCache)
+    arguments: --build-arg ARG_DOTNET_SDK_VERSION=$(SdkVersion)
+    repository: jasperd/servercore
     tags: |
-      $(Build.BuildId)
+      $(HashTag)
+      $(SdkTag)
+
+- task: Docker@2
+  displayName: Push Image to Docker Hub
+  inputs:
+    command: Push
+    containerRegistry: DockerHub
+    repository: jasperd/servercore
+    tags: |
       $(HashTag)
       $(SdkTag)
 

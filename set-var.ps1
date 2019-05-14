@@ -1,9 +1,0 @@
-$shortHash = $(Build.SourceVersion).Substring(0, 8)
-$SdkVersion = "2.2.203"
-$hashTag = "git-$shortHash"
-$sdkTag = "sdk-$SdkVersion"
-$noCache = "false"
-Write-Host "##vso[task.setvariable variable=HashTag]$SdkVersion"
-Write-Host "##vso[task.setvariable variable=HashTag]$hashTag"
-Write-Host "##vso[task.setvariable variable=SdkTag]$sdkTag"
-Write-Host "##vso[task.setvariable variable=noCache]$noCache"
