@@ -1,0 +1,35 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-2019'
+
+steps:
+- pwsh: .\set-var.ps1
+  displayName: 'Set build variables'
+
+- pwsh: gci "ENV:" | Out-Host
+  displayName: 'Show environment'
+
+- task: Docker@2
+  displayName: Login to Docker Hub
+  inputs:
+    command: login
+    containerRegistry: DockerHub
+
+- task: Docker@2
+  displayName: Build and Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: DockerHub
+    arguments: --build-args ARG_DOTNET_SDK_VERSION=$(SdkVersion) --no-cache=$(noCache)
+    tags: |
+      $(Build.BuildId)
+      $(HashTag)
+      $(SdkTag)
+
+- task: Docker@2
+  displayName: Logout of Docker Hub
+  inputs:
+    command: logout
+    containerRegistry: DockerHub
