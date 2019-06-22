@@ -14,3 +14,4 @@ RUN powershell iwr 'https://dot.net/v1/dotnet-install.ps1' -OutFile './dotnet-in
     setx /M DOTNET_SDK_VERSION %ARG_DOTNET_SDK_VERSION% && \
     setx /M DOTNET_TOOLS_PATH "C:\dotnet-tools" && \
     "C:/Program Files/dotnet/dotnet.exe" --info
+USER ContainerUser

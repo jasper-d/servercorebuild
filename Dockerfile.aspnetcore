@@ -10,3 +10,4 @@ RUN powershell iwr 'https://dot.net/v1/dotnet-install.ps1' -OutFile './dotnet-in
     setx /M ASPNETCORE_RUNTIME_VERSION %ARG_ASPNETCORE_RUNTIME_VERSION% && \
     setx /M ASPNETCORE_URLS "http://+:80" && \
     "C:\Program Files\dotnet\dotnet.exe" --info
+USER ContainerUser
