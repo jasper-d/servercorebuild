@@ -4,12 +4,12 @@ Param(
 	[string]$GitHash
 )
 
+$SdkVersion = "2.2.300"
+$hashTag = "sdk-git-$($GitHash.Substring(0, 8))"
+$sdkTag = "sdk-$SdkVersion"
 $RuntimeVersion = "2.2.5"
 $runtimeHashTag = "runtime-git-$($GitHash.Substring(0, 8))"
 $runtimeTag = "runtime-$RuntimeVersion"
-$SdkVersion = "2.2.204"
-$hashTag = "sdk-git-$($GitHash.Substring(0, 8))"
-$sdkTag = "sdk-$SdkVersion"
 $aspNetCoreVersion = "2.2.5"
 $aspNetCoreHashTag = "aspnetcore-git-$($GitHash.Substring(0, 8))"
 $aspNetCoreTag = "aspnetcore-$RuntimeVersion"
