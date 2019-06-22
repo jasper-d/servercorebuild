@@ -18,6 +18,28 @@ steps:
     containerRegistry: DockerHub
 
 - task: Docker@2
+  displayName: Build AspNetCore Docker Image
+  inputs:
+    command: build
+    Dockerfile: Dockerfile.aspnetcore
+    containerRegistry: DockerHub
+    arguments: --build-arg ARG_ASPNETCORE_RUNTIME_VERSION=$(AspNetCoreVersion)
+    repository: jasperd/servercore
+    tags: |
+      $(AspNetCoreHashTag)
+      $(AspNetCoreTag)
+
+- task: Docker@2
+  displayName: Push AspNetCore Image to Docker Hub
+  inputs:
+    command: Push
+    containerRegistry: DockerHub
+    repository: jasperd/servercore
+    tags: |
+      $(AspNetCoreHashTag)
+      $(AspNetCoreTag)
+
+- task: Docker@2
   displayName: Build Runtime Docker Image
   inputs:
     command: build

@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS servercoreruntime
+ARG ARG_ASPNETCORE_RUNTIME_VERSION
+RUN powershell iwr 'https://dot.net/v1/dotnet-install.ps1' -OutFile './dotnet-install.ps1' && \
+    powershell ./dotnet-install.ps1 -InstallDir 'C:\Program Files\dotnet' -Runtime aspnetcore -Channel Current -Version %ARG_ASPNETCORE_RUNTIME_VERSION%  && \
+    del .\dotnet-install.ps1 && \
+    setx /M PATH "%PATH%;C:\Program Files\dotnet" && \
+    setx /M DOTNET_CLI_TELEMETRY_OPTOUT "true" && \
+    setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE "true" && \
+    setx /M DOTNET_RUNNING_IN_CONTAINER "true" && \
+    setx /M ASPNETCORE_RUNTIME_VERSION %ARG_ASPNETCORE_RUNTIME_VERSION% && \
+    setx /M ASPNETCORE_URLS "http://+:80" && \
+    "C:\Program Files\dotnet\dotnet.exe" --info
