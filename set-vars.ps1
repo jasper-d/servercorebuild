@@ -4,13 +4,13 @@ Param(
 	[string]$GitHash
 )
 
-$SdkVersion = "2.2.300"
+$SdkVersion = "2.2.301"
 $hashTag = "sdk-git-$($GitHash.Substring(0, 8))"
 $sdkTag = "sdk-$SdkVersion"
-$RuntimeVersion = "2.2.5"
+$RuntimeVersion = "2.2.6"
 $runtimeHashTag = "runtime-git-$($GitHash.Substring(0, 8))"
 $runtimeTag = "runtime-$RuntimeVersion"
-$aspNetCoreVersion = "2.2.5"
+$aspNetCoreVersion = "2.2.6"
 $aspNetCoreHashTag = "aspnetcore-git-$($GitHash.Substring(0, 8))"
 $aspNetCoreTag = "aspnetcore-$RuntimeVersion"
 Write-Host "##vso[task.setvariable variable=SdkVersion]$SdkVersion"
