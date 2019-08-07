@@ -4,7 +4,7 @@ Param(
 	[string]$GitHash
 )
 
-$SdkVersion = "2.2.301"
+$SdkVersion = "2.2.401"
 $hashTag = "sdk-git-$($GitHash.Substring(0, 8))"
 $sdkTag = "sdk-$SdkVersion"
 $RuntimeVersion = "2.2.6"
